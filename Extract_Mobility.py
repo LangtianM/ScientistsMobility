@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import pickle
 
-#read the first 10000 rows of data/workid_authorid_institutionid_pubdate24.csv
+#read data/workid_authorid_institutionid_pubdate24.csv
 paper_data = pd.read_csv('data/workid_authorid_institutionid_pubdate24.csv', index_col=0)
 # read data/institution_geo24.pkl
 with open('data/institution_geo24.pkl', 'rb') as f:
