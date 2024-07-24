@@ -7,7 +7,6 @@ paper_data = pd.read_csv('data/workid_authorid_institutionid_pubdate24.csv', ind
 # read data/institution_geo24.pkl
 with open('data/institution_geo24.pkl', 'rb') as f:
     institution_geo = pickle.load(f)
-institution_geo
 
 institution_geo.dropna(subset=['city', 'country_code'], inplace=True)
 
