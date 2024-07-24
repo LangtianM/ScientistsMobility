@@ -57,25 +57,22 @@ def attr_within_country(move_data, country):
     city_atr = city_atr[sorted_colums]
     return city_atr
 
-def get_geo_info(institution_id, institution_geo):
-    ins_info = institution_geo[institution_geo['institution_id'] == institution_id]
-    if ins_info.empty:
-        print('Mising Geo Info:', institution_id)
-        return {'continent': None, 'country': None, 'city': None}
-    return {
-        'continent': ins_info['continent_code'].iloc[0],
-        'country': ins_info['country_code'].iloc[0],
-        'city': ins_info['city'].iloc[0]
-    }
-    
-def level_distance(ins_1, ins_2, institution_geo):
-    ins_1_info = get_geo_info(ins_1, institution_geo)
-    ins_2_info = get_geo_info(ins_2, institution_geo)
-    if ins_1_info['continent'] != ins_2_info['continent']:
+def get_geo_info_map(institution_geo):
+    geo_map = institution_geo.set_index('institution_id')[['continent_code', 'country_code', 'city']].to_dict(orient='index')
+    return geo_map
+
+def level_distance(ins_1_info, ins_2_info):
+    if ins_1_info['continent_code'] != ins_2_info['continent_code']:
         return 3
-    elif ins_1_info['country'] != ins_2_info['country']:
+    elif ins_1_info['country_code'] != ins_2_info['country_code']:
         return 2
     elif ins_1_info['city'] != ins_2_info['city']:
         return 1
-    else: return 0
+    else:
+        return 0
 
+def get_geo_info_from_map(institution_id, geo_map):
+    if institution_id not in geo_map:
+        print('Missing Geo Info:', institution_id)
+        return {'continent_code': None, 'country_code': None, 'city': None}
+    return geo_map[institution_id]
