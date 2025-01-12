@@ -24,8 +24,12 @@ def attr_within_continent(move_data, continent):
                                         & (continent_movement['move_year'] < (year+5))]
         cou_atr_slice = dict()
         sum = len(slice_data)
-        for country in countries:
-            cou_atr_slice[country] = len(slice_data[slice_data['country_code']==country]) / sum
+        if sum == 0:
+            for country in countries:
+                cou_atr_slice[country] = 0
+        else:
+            for country in countries:
+                cou_atr_slice[country] = len(slice_data[slice_data['country_code']==country]) / sum
         df_slice = pd.DataFrame([cou_atr_slice], index=['%d-%d'%(year, year+5)])
         cou_atr = pd.concat([cou_atr, df_slice])
     sorted_colums = cou_atr.iloc[-1].sort_values(ascending=False).index
