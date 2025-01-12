@@ -4,3 +4,7 @@ data/*
 SISMARTVA1.docx
 SISMARTVA2.docx
 datainfo.ipynb
+.DS_Store
+.vscode/
+__pycache__/
+
