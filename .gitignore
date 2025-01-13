@@ -3,6 +3,9 @@ data/institution_geo24.pkl
 data/*
 SISMARTVA1.docx
 SISMARTVA2.docx
+*.docx
+*.pdf
+*.doc
 datainfo.ipynb
 .DS_Store
 .vscode/
